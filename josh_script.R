@@ -5,8 +5,14 @@
       Name = "Josh",
       Words = c("R", "population", "abundance", "survival", "ratios", 
         "management", "dplyr", "purrr", "tidyr", "shiny", "JAGS", "bayesian",
-        "functional programming", ),
-      Importance = c(10, 8, 8, 7, 5, 10, 6, 6, 6, 7, 8, 9, 8)
+        "functional programming", "mule deer", "elk", "sage grouse", 
+        "axis deer", "bighorn sheep", "white-tailed deer", "grizzly bear",
+        "black bear", "bobcat", "wolverine", "fisher", "lynx", "fox", 
+        "snowshoe hare", "mountain lion", "Idaho", "South Dakota", "Montana", 
+        "bison", "Arizona", "Washington", "N-mixture", "mark-recapture",
+        "Speedgoat", "USGS", "USFS", "NPS", "IPM"
+      ),
+     freq = 1
     )
     
     save(dat, file = "~/GitHub/LukacsLabWordCloud/data/nowak.RData")
