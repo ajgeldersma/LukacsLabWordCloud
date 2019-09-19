@@ -5,18 +5,16 @@
     #  Packages
     require(wordcloud2)
     require(wordcloud)
-    require(rvest)
-    require(purrr)
-    require(dplyr)
+    require(tidyverse)
 ################################################################################
     #  Repo data folder
-    setwd(
-      file.path(
-        "C:/Users/",
-        Sys.info()["login"],
-        "Documents/GitHub/LukacsLabWordCloud/data"
-      )
-    )
+    # setwd(
+    #   file.path(
+    #     "C:/Users/",
+    #     Sys.info()["login"],
+    #     "Documents/GitHub/LukacsLabWordCloud/data"
+    #   )
+    # )
     
     #  Function to load each data set
     loaded <- function(x){
@@ -38,9 +36,9 @@
           word = replace(word, word == "time to event", "time-to-event"),
           word = replace(word, word == "bayesian", "Bayesian"),
           word = replace(
-            word, 
+            word,
             word %in% tolower(state.name),
-            state.name[word == tolower(state.name)]
+            state.name[word[word %in% tolower(state.name)] == tolower(state.name)]
           )
         )
       
@@ -48,12 +46,14 @@
     }
     
     #  Call function on each of the .RData objects in the folder
+    files <- list.files(path = paste(here::here(), "data", sep = "/"), pattern = ".RData$", full.names = T)
     wrd_dat <- map_df(
-      list.files(pattern = ".RData$", full.names = T), 
+      files,
       loaded
     ) %>%
     count(word) %>%
     rename(freq = n)
+    
 ################################################################################
     #  Build wordcloud using wordcloud2 htmlwidget
     wordcloud2(wrd_dat, size = 1, minRotation = -pi/2, maxRotation = -pi/2)
@@ -76,4 +76,6 @@
       random.color = T
     )
     dev.off()
+    
+    
     
